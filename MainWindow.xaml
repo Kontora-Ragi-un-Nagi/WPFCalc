@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="WPF Calculator" 
         MinHeight="265" 
-        MinWidth="250" 
+        MinWidth="250" Topmost="True"
         PreviewTextInput="Window_PreviewTextInput" 
         WindowStartupLocation="CenterScreen" Height="400" Width="250">
     <Grid>
