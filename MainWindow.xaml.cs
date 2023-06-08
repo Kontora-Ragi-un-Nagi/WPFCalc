@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 using WPFCalc.Utils;
 
 namespace WPFCalc
@@ -30,7 +31,7 @@ namespace WPFCalc
 
         private void regularButtonClick(object sender, RoutedEventArgs e)
             => SendToInput(((Button)sender).Content.ToString());
-        
+
         private void SendToInput(string content)
         {
             //Prevent 0 from appearing on the left of new numbers
@@ -137,7 +138,7 @@ namespace WPFCalc
             {
                 txtInput.Text = (FirstValue = CurrentOperation.DoOperation(FirstValue, (decimal)(SecondValue = val2))).ToString();
             }
-            catch(DivideByZeroException)
+            catch (DivideByZeroException)
             {
                 MessageBox.Show("Can't divide by zero", "Divided by zero", MessageBoxButton.OK, MessageBoxImage.Error);
                 btnClearAll.PerformClick();
@@ -152,6 +153,32 @@ namespace WPFCalc
             FirstValue = 0;
             CurrentOperation = null;
             txtInput.Text = "0";
+        }
+
+        private void btnSQRT_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string CurrentDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+                string StringValue = txtInput.Text;
+                if (StringValue.Contains(".")) StringValue = StringValue.Replace(".", CurrentDecimalSeparator);
+                else
+                if (StringValue.Contains(",")) StringValue = StringValue.Replace(",", CurrentDecimalSeparator);
+
+                double value = double.Parse(StringValue);
+                if (value < 0)
+                {
+                    MessageBox.Show("Nedrīkst izvilkt kvadrātsakni no negatīva skaitļa!");
+                }
+                else
+                {
+                    txtInput.Text = Math.Sqrt(value).ToString();
+                }
+            }
+            catch (ArgumentException argex)
+            {
+                MessageBox.Show("Vertība nepareizājā formātā");
+            }
         }
     }
 }
