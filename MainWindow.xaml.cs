@@ -108,6 +108,8 @@ namespace WPFCalc
                     btnEquals.PerformClick();
                     break;
 
+                case "q": btnSQRT_Click(sender, e); break;
+
                 default:
                     //Can't use directly from switch because it is not a constant
                     if (e.Text == DecimalSeparator)
