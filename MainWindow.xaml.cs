@@ -109,6 +109,8 @@ namespace WPFCalc
                     break;
 
                 case "q": btnSQRT_Click(sender, e); break;
+                case ".":
+                case ",": btnPoint_Click(btnPoint, e); break;
 
                 default:
                     //Can't use directly from switch because it is not a constant
