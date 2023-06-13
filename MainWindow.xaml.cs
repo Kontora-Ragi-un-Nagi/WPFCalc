@@ -93,7 +93,8 @@ namespace WPFCalc
                     break;
 
                 case "-":
-                    btnSubtraction.PerformClick();
+                    WorkWithMinus();
+
                     break;
 
                 case "+":
@@ -126,6 +127,25 @@ namespace WPFCalc
 
             //This will prevent other buttons focus firing its click event on <ENTER> while typing
             btnEquals.Focus();
+        }
+
+
+        bool minusflag = false;
+        private void WorkWithMinus()
+        {
+            if (txtInput.Text == "0")
+            {
+                txtInput.Text = "-";
+                minusflag = true;
+            }
+            else if (txtInput.Text == "-")
+            {
+                txtInput.Text = "0";
+            }
+            else
+            {
+                operationButton_Click(btnSubtraction, null);
+            }
         }
 
         private void btnEquals_Click(object sender, RoutedEventArgs e)
@@ -183,6 +203,11 @@ namespace WPFCalc
             {
                 MessageBox.Show("Vertība nepareizājā formātā");
             }
+        }
+
+        private void btnSubtraction_Click(object sender, RoutedEventArgs e)
+        {
+            WorkWithMinus();
         }
     }
 }

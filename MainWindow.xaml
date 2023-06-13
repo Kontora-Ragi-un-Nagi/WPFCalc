@@ -40,7 +40,7 @@
         <Button x:Name="btnDivision" Content="/" Grid.Row="1" Grid.Column="3" FontSize="20" Margin="2" Click="operationButton_Click"/>
         <Button x:Name="btnMultiplication" Content="*" Grid.Row="2" Grid.Column="3" FontSize="20" Margin="2" Click="operationButton_Click"/>
         <Button x:Name="btnSum" Content="+" Grid.Row="3" Grid.Column="4" FontSize="20" Margin="2" Click="operationButton_Click"/>
-        <Button x:Name="btnSubtraction" Content="-" Grid.Row="4" Grid.Column="3" FontSize="20" Margin="2" Click="operationButton_Click"/>
+        <Button x:Name="btnSubtraction" Content="-" Grid.Row="4" Grid.Column="3" FontSize="20" Margin="2" Click="btnSubtraction_Click"/>
         <Button x:Name="btnSQRT" Content="SQRT" Grid.Row="5" Grid.Column="2" FontSize="20" Margin="2"  Click="btnSQRT_Click"/>
         <Button x:Name="btnEquals" Content="=" Grid.Row="5" Grid.Column="3" FontSize="20" Margin="2"  Click="btnEquals_Click"/>
         <Button x:Name="btnBack" Content="←" Grid.Row="1" Grid.Column="0" FontSize="20" Margin="2" Click="btnBack_Click"/>
