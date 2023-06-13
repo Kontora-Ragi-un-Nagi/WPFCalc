@@ -35,6 +35,7 @@ namespace WPFCalc
 
         private void SendToInput(string content)
         {
+
             if (EqualFlag) { txtInput.Text = ""; EqualFlag = false; }
 
             //Prevent 0 from appearing on the left of new numbers
@@ -49,7 +50,7 @@ namespace WPFCalc
             if (txtInput.Text.Contains(this.DecimalSeparator))
                 return;
 
-            regularButtonClick(sender, e);
+            SendToInput(this.DecimalSeparator);
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -69,7 +70,7 @@ namespace WPFCalc
 
             //if current operation is not null then we already have the FirstValue
             if (CurrentOperation == null)
-                FirstValue = Convert.ToDecimal(txtInput.Text);
+                FirstValue = Convert.ToDecimal(txtInput.Text.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
 
             CurrentOperation = (IOperation)((Button)sender).Tag;
             SecondValue = null;
@@ -164,7 +165,7 @@ namespace WPFCalc
                 return;
 
             //SecondValue is used for multiple clicks on Equals bringing the newest result of last operation
-            decimal val2 = SecondValue ?? Convert.ToDecimal(txtInput.Text);
+            decimal val2 = SecondValue ?? Convert.ToDecimal(txtInput.Text.Replace(",",CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
             try
             {
                 txtInput.Text = (FirstValue = CurrentOperation.DoOperation(FirstValue, (decimal)(SecondValue = val2))).ToString();
