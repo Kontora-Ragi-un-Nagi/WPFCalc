@@ -13,6 +13,7 @@ namespace WPFCalc
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool EqualFlag = false;
         string DecimalSeparator => CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
         decimal FirstValue { get; set; }
         decimal? SecondValue { get; set; }
@@ -34,6 +35,8 @@ namespace WPFCalc
 
         private void SendToInput(string content)
         {
+            if (EqualFlag) { txtInput.Text = ""; EqualFlag = false; }
+
             //Prevent 0 from appearing on the left of new numbers
             if (txtInput.Text == "0")
                 txtInput.Text = "";
@@ -62,6 +65,8 @@ namespace WPFCalc
 
         private void operationButton_Click(object sender, RoutedEventArgs e)
         {
+            EqualFlag = false;
+
             //if current operation is not null then we already have the FirstValue
             if (CurrentOperation == null)
                 FirstValue = Convert.ToDecimal(txtInput.Text);
@@ -150,6 +155,8 @@ namespace WPFCalc
 
         private void btnEquals_Click(object sender, RoutedEventArgs e)
         {
+            EqualFlag = true;
+
             if (CurrentOperation == null)
                 return;
 
