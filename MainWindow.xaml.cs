@@ -43,6 +43,12 @@ namespace WPFCalc
                 txtInput.Text = "";
 
             txtInput.Text = $"{txtInput.Text}{content}";
+
+
+            if (txtInput.Text.StartsWith('.'))
+            {
+                txtInput.Text = $"0{txtInput.Text}";
+            }
         }
 
         private void btnPoint_Click(object sender, RoutedEventArgs e)
