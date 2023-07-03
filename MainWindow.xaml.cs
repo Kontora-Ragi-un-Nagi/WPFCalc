@@ -35,7 +35,7 @@ namespace WPFCalc
 
         private void SendToInput(string content)
         {
-            if (ClearFlag) txtInput.Text = "";
+            if (ClearFlag && txtInput.Text!="-") txtInput.Text = "";
 
             if (EqualFlag) { txtInput.Text = ""; EqualFlag = false; }
 
@@ -77,7 +77,14 @@ namespace WPFCalc
         private bool ClearFlag = false;
         private void operationButton_Click(object sender, RoutedEventArgs e)
         {
+
             EqualFlag = false;
+
+            if(CurrentOperation != null && CurrentOperation is not Subtraction && (IOperation)((Button)sender).Tag is Subtraction)
+            {
+                txtInput.Text = "-";
+                return;
+            }
 
             //if current operation is not null then we already have the FirstValue
             if (CurrentOperation == null)
