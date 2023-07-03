@@ -35,7 +35,7 @@ namespace WPFCalc
 
         private void SendToInput(string content)
         {
-            if (ClearFlag && txtInput.Text!="-") txtInput.Text = "";
+            if (ClearFlag && txtInput.Text != "-") txtInput.Text = "";
 
             if (EqualFlag) { txtInput.Text = ""; EqualFlag = false; }
 
@@ -80,7 +80,7 @@ namespace WPFCalc
 
             EqualFlag = false;
 
-            if(CurrentOperation != null && CurrentOperation is not Subtraction && (IOperation)((Button)sender).Tag is Subtraction)
+            if (CurrentOperation != null && CurrentOperation is not Subtraction && (IOperation)((Button)sender).Tag is Subtraction)
             {
                 txtInput.Text = "-";
                 return;
@@ -88,22 +88,33 @@ namespace WPFCalc
 
             //if current operation is not null then we already have the FirstValue
             if (CurrentOperation == null)
+            {
                 FirstValue = Convert.ToDecimal(txtInput.Text.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
 
-            CurrentOperation = (IOperation)((Button)sender).Tag;
-            SetOperation(CurrentOperation);
+                CurrentOperation = (IOperation)((Button)sender).Tag;
+                SetOperation(CurrentOperation);
 
-            SecondValue = null;
-            ClearFlag = true;
+                SecondValue = null;
+                ClearFlag = true;
+                return;
+            }
+
+            if (CurrentOperation is not null)
+            {
+                btnEquals_Click(sender, e);
+                SetOperation(CurrentOperation);
+                SecondValue = null;
+                ClearFlag = true;
+            }
         }
 
         private void SetOperation(IOperation currentOperation)
         {
-            if(currentOperation is Division)
+            if (currentOperation is Division)
             {
                 tbOperacija.Text = "/";
             }
-            if(currentOperation is Multiplication)
+            if (currentOperation is Multiplication)
             {
                 tbOperacija.Text = "*";
             }
@@ -205,7 +216,7 @@ namespace WPFCalc
                 return;
 
             //SecondValue is used for multiple clicks on Equals bringing the newest result of last operation
-            decimal val2 = SecondValue ?? Convert.ToDecimal(txtInput.Text.Replace(",",CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
+            decimal val2 = SecondValue ?? Convert.ToDecimal(txtInput.Text.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
             try
             {
                 txtInput.Text = (FirstValue = CurrentOperation.DoOperation(FirstValue, (decimal)(SecondValue = val2))).ToString();
