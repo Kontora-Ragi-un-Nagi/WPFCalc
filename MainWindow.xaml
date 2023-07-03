@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen" Height="400" Width="250">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -25,7 +25,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="txtInput" Grid.Row="0" Grid.ColumnSpan="4" Margin="2" TextAlignment="Right" Text="0" FontSize="20" IsReadOnly="True"/>
+        
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="4" Margin="2">
+            <TextBlock FontSize="10" Name="tbOperacija"  TextAlignment="Right" Margin="0,2,5,2" Foreground="Red" FontWeight="DemiBold"></TextBlock>
+            <TextBox x:Name="txtInput"  TextAlignment="Right" Text="0" FontSize="20" IsReadOnly="True"/>
+        </StackPanel>
+        
         <Button x:Name="btn7" Content="7" Grid.Row="2" Grid.Column="0" FontSize="20" Margin="2" Click="regularButtonClick"/>
         <Button x:Name="btn8" Content="8" Grid.Row="2" Grid.Column="1" FontSize="20" Margin="2" Click="regularButtonClick"/>
         <Button x:Name="btn9" Content="9" Grid.Row="2" Grid.Column="2" FontSize="20" Margin="2" Click="regularButtonClick"/>

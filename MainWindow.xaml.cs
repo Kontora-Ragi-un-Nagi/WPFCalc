@@ -73,8 +73,30 @@ namespace WPFCalc
                 FirstValue = Convert.ToDecimal(txtInput.Text.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Replace("'", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator)));
 
             CurrentOperation = (IOperation)((Button)sender).Tag;
+            SetOperation(CurrentOperation);
+
             SecondValue = null;
             txtInput.Text = "";
+        }
+
+        private void SetOperation(IOperation currentOperation)
+        {
+            if(currentOperation is Division)
+            {
+                tbOperacija.Text = "/";
+            }
+            if(currentOperation is Multiplication)
+            {
+                tbOperacija.Text = "*";
+            }
+            if (currentOperation is Sum)
+            {
+                tbOperacija.Text = "+";
+            }
+            if (currentOperation is Subtraction)
+            {
+                tbOperacija.Text = "-";
+            }
         }
 
         private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
