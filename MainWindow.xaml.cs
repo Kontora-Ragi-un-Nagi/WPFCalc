@@ -35,6 +35,7 @@ namespace WPFCalc
 
         private void SendToInput(string content)
         {
+            if (ClearFlag) txtInput.Text = "";
 
             if (EqualFlag) { txtInput.Text = ""; EqualFlag = false; }
 
@@ -49,6 +50,8 @@ namespace WPFCalc
             {
                 txtInput.Text = $"0{txtInput.Text}";
             }
+
+            ClearFlag = false;
         }
 
         private void btnPoint_Click(object sender, RoutedEventArgs e)
@@ -70,6 +73,8 @@ namespace WPFCalc
                 txtInput.Text = "0";
         }
 
+
+        private bool ClearFlag = false;
         private void operationButton_Click(object sender, RoutedEventArgs e)
         {
             EqualFlag = false;
@@ -82,7 +87,7 @@ namespace WPFCalc
             SetOperation(CurrentOperation);
 
             SecondValue = null;
-            txtInput.Text = "";
+            ClearFlag = true;
         }
 
         private void SetOperation(IOperation currentOperation)
