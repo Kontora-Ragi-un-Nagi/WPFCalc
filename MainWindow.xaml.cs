@@ -46,7 +46,7 @@ namespace WPFCalc
             txtInput.Text = $"{txtInput.Text}{content}";
 
 
-            if (txtInput.Text.StartsWith('.'))
+            if (txtInput.Text.StartsWith('.') || txtInput.Text.StartsWith(','))
             {
                 txtInput.Text = $"0{txtInput.Text}";
             }
